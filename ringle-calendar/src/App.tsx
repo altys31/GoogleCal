@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import { CalendarHeader } from "./components/CalendarHeader";
+import { SideCalendar } from "./components/SideCalendar";
+import { WeekView } from "./components/WeekView";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [date, setDate] = useState(new Date());
+  const [sideFold, setSideFold] = useState(false);
+
+  const setTodayDate = () => {
+    setDate(new Date());
+  };
+
+  const handleSideFold = () => {
+    setSideFold(!sideFold);
+  };
+
+  const handleNextweek = () => {
+    const newDate = new Date(date);
+    newDate.setDate(newDate.getDate() + 7);
+    setDate(newDate);
+  };
+
+  const handlePreviousweek = () => {
+    const newDate = new Date(date);
+    newDate.setDate(newDate.getDate() - 7);
+    setDate(newDate);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      <CalendarHeader
+        date={date}
+        setTodayDate={setTodayDate}
+        plusWeek={handleNextweek}
+        minusWeek={handlePreviousweek}
+        sideFold={sideFold}
+        handleSideFold={handleSideFold}
+      />
+      <div className="flex w-full">
+        <SideCalendar sideFold={sideFold} />
+        <WeekView />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
