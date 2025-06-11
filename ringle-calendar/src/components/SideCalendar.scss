@@ -1,0 +1,12 @@
+.sideCalendar{
+  transition: all 0.3s ease;
+}
+
+.folded{
+  width: 0;
+  opacity : 0;
+}
+
+.unfolded{
+  width: 25%;
+}
