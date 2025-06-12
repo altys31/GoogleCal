@@ -40,7 +40,7 @@ function App() {
       />
       <div className="flex w-full">
         <SideCalendar sideFold={sideFold} />
-        <WeekView />
+        <WeekView folded={sideFold} />
       </div>
     </div>
   );

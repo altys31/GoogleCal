@@ -1,9 +1,9 @@
-import { convertHeaderDate } from "../utils/utils";
+import styles from "./style.module.scss";
+import { convertHeaderDate } from "../../utils/utils";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
-import calIcon from "../assets/googleCalendarIcon.png";
-import "./CalendarHeader.scss";
+import calIcon from "../../assets/googleCalendarIcon.png";
 
 export interface CalendarHeaderProps {
   date: Date;
@@ -25,28 +25,28 @@ export const CalendarHeader = ({
   return (
     <header className="flex min-h-12 border-4 justify-center items-center">
       <div className="w-3/12 flex gap-4 ml-4 items-center">
-        <div className="hamburgerButton" onClick={handleSideFold}>
+        <div className={styles.hamburgerButton} onClick={handleSideFold}>
           <GiHamburgerMenu />
         </div>
         <div className="flex gap-2 items-center">
-          <img src={calIcon} className="w-12"></img>
+          <img src={calIcon} className="w-12" />
           <div className="font-semibold text-slate-600">캘린더</div>
         </div>
       </div>
 
       <div className="w-9/12 flex justfy-around gap-4">
-        <div className="setTodayButton" onClick={setTodayDate}>
+        <div className={styles.setTodayButton} onClick={setTodayDate}>
           오늘
         </div>
         <div className="flex">
-          <div className="arrowButton">
+          <div className={styles.arrowButton}>
             <IoIosArrowBack onClick={minusWeek} />
           </div>
-          <div className="arrowButton">
+          <div className={styles.arrowButton}>
             <IoIosArrowForward onClick={plusWeek} />
           </div>
         </div>
-        <div className="select-none font-middle font-sans">{convertHeaderDate(date)}</div>
+        <div className="select-none font-middle">{convertHeaderDate(date)}</div>
       </div>
     </header>
   );
