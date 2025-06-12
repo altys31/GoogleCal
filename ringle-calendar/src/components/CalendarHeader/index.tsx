@@ -3,25 +3,20 @@ import { convertHeaderDate } from "../../utils/utils";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
+import type { RootState } from "../../store/store";
+import { goToNextWeek, goToPrevWeek, resetToToday } from "../../store/dateSlice";
 import calIcon from "../../assets/googleCalendarIcon.png";
+import { useDispatch, useSelector } from "react-redux";
 
 export interface CalendarHeaderProps {
-  date: Date;
-  setTodayDate: () => void;
-  plusWeek: () => void;
-  minusWeek: () => void;
   sideFold: boolean;
   handleSideFold: () => void;
 }
 
-export const CalendarHeader = ({
-  date,
-  setTodayDate,
-  plusWeek,
-  minusWeek,
-  sideFold,
-  handleSideFold,
-}: CalendarHeaderProps) => {
+export const CalendarHeader = ({ sideFold, handleSideFold }: CalendarHeaderProps) => {
+  const date = useSelector((state: RootState) => state.date.currentDate);
+  const dispatch = useDispatch();
+
   return (
     <header className="flex min-h-12 border-4 justify-center items-center">
       <div className="w-3/12 flex gap-4 ml-4 items-center">
@@ -35,15 +30,15 @@ export const CalendarHeader = ({
       </div>
 
       <div className="w-9/12 flex justfy-around gap-4">
-        <div className={styles.setTodayButton} onClick={setTodayDate}>
+        <div className={styles.setTodayButton} onClick={() => dispatch(resetToToday())}>
           오늘
         </div>
         <div className="flex">
           <div className={styles.arrowButton}>
-            <IoIosArrowBack onClick={minusWeek} />
+            <IoIosArrowBack onClick={() => dispatch(goToPrevWeek())} />
           </div>
           <div className={styles.arrowButton}>
-            <IoIosArrowForward onClick={plusWeek} />
+            <IoIosArrowForward onClick={() => dispatch(goToNextWeek())} />
           </div>
         </div>
         <div className="select-none font-middle">{convertHeaderDate(date)}</div>
