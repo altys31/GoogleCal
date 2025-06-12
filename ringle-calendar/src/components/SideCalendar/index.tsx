@@ -24,7 +24,6 @@ export const SideCalendar = ({ sideFold }: SideCalendarProps) => {
           sideFold ? styles.folded : styles.unfolded
         }`}
         onTransitionEnd={() => setVisible(false)}
-        onTransitionRun={() => setVisible(true)}
       >
         <DayPicker
           navLayout="after"

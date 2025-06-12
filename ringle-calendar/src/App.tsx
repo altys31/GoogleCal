@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { CalendarHeader } from "./components/CalendarHeader";
 import { SideCalendar } from "./components/SideCalendar";
-import { WeekView } from "./components/WeekView";
+import { EventView } from "./components/EventView";
 
 function App() {
   const [sideFold, setSideFold] = useState(false);
@@ -16,7 +16,7 @@ function App() {
       <CalendarHeader sideFold={sideFold} handleSideFold={handleSideFold} />
       <div className="flex w-full">
         <SideCalendar sideFold={sideFold} />
-        <WeekView folded={sideFold} />
+        <EventView folded={sideFold} />
       </div>
     </div>
   );
