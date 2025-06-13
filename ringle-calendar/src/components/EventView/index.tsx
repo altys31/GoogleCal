@@ -10,31 +10,35 @@ import {
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
+import { setDate } from "../../store/dateSlice";
+
 import { useState } from "react";
-import type { Event } from "../../types/type";
 export interface EventViewProps {
   folded: boolean;
+  handleModal: () => void;
 }
-export const EventView = ({ folded }: EventViewProps) => {
+export const EventView = ({ folded, handleModal }: EventViewProps) => {
   const date = useSelector((state: RootState) => state.date.currentDate);
+  const appointments = useSelector((state: RootState) => state.appointment.currentEvent);
   const dispatch = useDispatch();
-  const [data, setData] = useState([
-    {
-      title: "일정",
-      startDate: new Date(2025, 5, 12, 11, 30),
-      endDate: new Date(2025, 5, 12, 23, 30),
-    },
-  ]);
 
   return (
-    <div className={`h-full duration-300 ${folded ? `w-full` : `w-9/12`}`}>
+    <div className={`h-full duration-300 ${folded ? `w-full` : `w-10/12`}`}>
       <Paper>
-        <Scheduler data={data} height={660} locale={"kr-ko"}>
+        <Scheduler data={appointments} height={660} locale={"kr-ko"}>
           <ViewState currentDate={date} />
           <WeekView
             cellDuration={60}
             timeTableCellComponent={(props) => (
-              <WeekView.TimeTableCell {...props} onClick={() => {}} />
+              <WeekView.TimeTableCell
+                {...props}
+                onClick={() => {
+                  if (props.startDate) {
+                    dispatch(setDate(props.startDate));
+                    handleModal();
+                  }
+                }}
+              />
             )}
           />
           <MonthView />
