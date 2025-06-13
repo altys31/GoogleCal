@@ -6,7 +6,18 @@ interface appointmentState{
 }
 
 const initialState: appointmentState = {
-  currentEvent: []
+  currentEvent: [{
+    id: "1",
+    title: "운동",
+    startDate: new Date(2025,5, 13, 21,0),
+    endDate: new Date(2025,5,13,22,0),
+  },
+  {
+    id: "2",
+    title: "업무",
+    startDate: new Date(2025,5, 13, 9,0),
+    endDate: new Date(2025,5,13,18,0),
+  }]
 };
 
 const appointmentSlice = createSlice({
@@ -16,7 +27,7 @@ const appointmentSlice = createSlice({
     addAppointment(state, action: PayloadAction<Appointment>) {
       state.currentEvent.push(action.payload);
     },
-    deleteAppointment(state, action: PayloadAction<number>) {
+    deleteAppointment(state, action: PayloadAction<string>) {
       state.currentEvent = state.currentEvent.filter((appointment)=> appointment.id !== action.payload)
     }
   ,}
@@ -24,3 +35,4 @@ const appointmentSlice = createSlice({
 
 export const { addAppointment, deleteAppointment } = appointmentSlice.actions;
 export default appointmentSlice.reducer;
+

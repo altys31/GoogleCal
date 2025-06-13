@@ -1,0 +1,11 @@
+.titleBox{
+  grid-template-columns: 1fr 6fr;
+}
+
+.iconBox {
+  grid-column : 1/2;
+}
+
+.textBox {
+  grid-column : 2/3;
+}

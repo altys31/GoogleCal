@@ -11,13 +11,21 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
 import { setDate } from "../../store/dateSlice";
+import type { Appointment } from "../../types/type";
 
-import { useState } from "react";
 export interface EventViewProps {
   folded: boolean;
-  handleModal: () => void;
+  openAddModal: () => void;
+  openEditModal: () => void;
+  handleSelectedEvent: (e: Appointment) => void;
 }
-export const EventView = ({ folded, handleModal }: EventViewProps) => {
+
+export const EventView = ({
+  folded,
+  openAddModal,
+  openEditModal,
+  handleSelectedEvent,
+}: EventViewProps) => {
   const date = useSelector((state: RootState) => state.date.currentDate);
   const appointments = useSelector((state: RootState) => state.appointment.currentEvent);
   const dispatch = useDispatch();
@@ -35,7 +43,7 @@ export const EventView = ({ folded, handleModal }: EventViewProps) => {
                 onClick={() => {
                   if (props.startDate) {
                     dispatch(setDate(props.startDate));
-                    handleModal();
+                    openAddModal();
                   }
                 }}
               />
@@ -44,7 +52,29 @@ export const EventView = ({ folded, handleModal }: EventViewProps) => {
           <MonthView />
           <Toolbar />
           <ViewSwitcher />
-          <Appointments />
+          <Appointments
+            appointmentComponent={(props) => (
+              <Appointments.Appointment
+                {...props}
+                onClick={() => {
+                  openEditModal();
+                  if (
+                    !props.data.id ||
+                    !props.data.title ||
+                    !props.data.startDate ||
+                    !props.data.endDate
+                  )
+                    return;
+                  handleSelectedEvent({
+                    id: props.data.id.toString(),
+                    title: props.data.title,
+                    startDate: new Date(props.data.startDate),
+                    endDate: new Date(props.data.endDate),
+                  });
+                }}
+              />
+            )}
+          />
         </Scheduler>
       </Paper>
     </div>
