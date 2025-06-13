@@ -32,8 +32,8 @@ export const Modal = ({ handleModal }: ModalProps) => {
     const appointment = {
       id: newId,
       title: title,
-      startDate: new Date(`${date}T${startTime}`),
-      endDate: new Date(`${date}T${endTime}`),
+      startDate: new Date(`${appointmentDate}T${startTime}`),
+      endDate: new Date(`${appointmentDate}T${endTime}`),
     };
 
     if (startTime >= endTime) {
