@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { ko } from "react-day-picker/locale";
 import { format } from "date-fns";
@@ -18,7 +17,6 @@ export interface SideCalendarProps {
 export const SideCalendar = ({ sideFold, handleModal }: SideCalendarProps) => {
   const date = useSelector((state: RootState) => state.date.currentDate);
   const dispatch = useDispatch();
-  const [visible, setVisible] = useState(true);
 
   return (
     <>
@@ -26,7 +24,6 @@ export const SideCalendar = ({ sideFold, handleModal }: SideCalendarProps) => {
         className={`${styles.sideCalendar} flex flex-col justify-start items-start ${
           sideFold ? styles.folded : styles.unfolded
         }`}
-        onTransitionEnd={() => setVisible(false)}
       >
         <div className="text-nowrap">
           <Button
