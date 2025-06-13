@@ -7,12 +7,15 @@ import type { RootState } from "../../store/store";
 import { setDate } from "../../store/dateSlice";
 import "./daypicker-custom.css";
 import { useDispatch, useSelector } from "react-redux";
+import { Button } from "@mui/material";
+import { FaPlus } from "react-icons/fa6";
 
 export interface SideCalendarProps {
   sideFold: boolean;
+  handleModal: () => void;
 }
 
-export const SideCalendar = ({ sideFold }: SideCalendarProps) => {
+export const SideCalendar = ({ sideFold, handleModal }: SideCalendarProps) => {
   const date = useSelector((state: RootState) => state.date.currentDate);
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(true);
@@ -20,17 +23,33 @@ export const SideCalendar = ({ sideFold }: SideCalendarProps) => {
   return (
     <>
       <div
-        className={`${styles.sideCalendar} flex justify-center ${
+        className={`${styles.sideCalendar} flex flex-col justify-start items-start ${
           sideFold ? styles.folded : styles.unfolded
         }`}
         onTransitionEnd={() => setVisible(false)}
       >
+        <div className="text-nowrap">
+          <Button
+            variant="outlined"
+            color="inherit"
+            onClick={handleModal}
+            fullWidth={false}
+            size="large"
+          >
+            <div className="flex items-center gap-2">
+              <FaPlus />
+              <div>만들기</div>
+            </div>
+          </Button>
+        </div>
         <DayPicker
           navLayout="after"
           showOutsideDays
           locale={ko}
           selected={date}
           animate
+          month={date}
+          onMonthChange={(newMonth) => dispatch(setDate(newMonth))}
           onSelect={(date: Date | undefined) => {
             if (date) dispatch(setDate(date));
           }}
