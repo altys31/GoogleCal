@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { Checkbox, MenuItem, Select, TextField, type SelectChangeEvent } from "@mui/material";
 import { HiMiniXMark } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
@@ -15,6 +15,8 @@ export const AddModal = ({ closeModal }: ModalProps) => {
   const date = useSelector((state: RootState) => state.date.currentDate);
   const dispatch = useDispatch();
 
+  const [rMode, setRMode] = useState<boolean>(false);
+
   const [title, setTitle] = useState<string>("");
   const [appointmentDate, setAppointmentDate] = useState<string>(
     format(date, "yyyy-MM-dd'T'HH:mm:ss").split("T")[0]
@@ -25,15 +27,36 @@ export const AddModal = ({ closeModal }: ModalProps) => {
   const [endTime, setEndTime] = useState<string>(
     format(date, "yyyy-MM-dd'T'HH:mm:ss").split("T")[1]
   );
+  const [selectBoxItem, setSelectBoxItem] = useState<string>("선택");
+
+  const [rRule, setRRule] = useState<string>("");
 
   useEffect(() => {
     setAppointmentDate(format(date, "yyyy-MM-dd'T'HH:mm:ss").split("T")[0]);
   }, [date]);
 
+  const handleChange = (e: SelectChangeEvent<string>) => {
+    setSelectBoxItem(e.target.value);
+
+    switch (e.target.value) {
+      case "선택":
+        setRRule("");
+        break;
+      case "매일":
+        setRRule("FREQ=DAILY");
+        break;
+      case "매주":
+        setRRule("FREQ=WEEKLY");
+        break;
+      case "매달":
+        setRRule("FREQ=MONTHLY");
+    }
+  };
+
   const addAppointment = () => {
     const newId = uuidv4();
 
-    if (!title || !date || !startTime || !endTime) {
+    if (!title || !date || !startTime || !endTime || (rMode && !rRule)) {
       alert("모든 항목을 입력해주세요.");
       return;
     }
@@ -43,6 +66,7 @@ export const AddModal = ({ closeModal }: ModalProps) => {
       title: title,
       startDate: new Date(`${appointmentDate}T${startTime}`),
       endDate: new Date(`${appointmentDate}T${endTime}`),
+      rRule: rRule,
     };
 
     if (startTime >= endTime) {
@@ -63,7 +87,7 @@ export const AddModal = ({ closeModal }: ModalProps) => {
           <HiMiniXMark size={24} color="black" />
         </div>
         <div className="w-full h-full flex flex-col justify-around items-start">
-          <div>
+          <div className="pl-4">
             <TextField
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -80,6 +104,25 @@ export const AddModal = ({ closeModal }: ModalProps) => {
             <input value={startTime} onChange={(e) => setStartTime(e.target.value)} type="time" />
             <input value={endTime} onChange={(e) => setEndTime(e.target.value)} type="time" />
           </div>
+          <div className="flex items-center text-xs pl-3">
+            <Checkbox size="small" onClick={() => setRMode(!rMode)} /> 반복일정
+            {rMode && (
+              <div className="pl-4">
+                <Select
+                  size="small"
+                  label="frequent"
+                  value={selectBoxItem}
+                  onChange={(e) => handleChange(e)}
+                >
+                  <MenuItem value={"선택"}>선택</MenuItem>
+                  <MenuItem value={"매일"}>매일</MenuItem>
+                  <MenuItem value={"매주"}>매주</MenuItem>
+                  <MenuItem value={"매달"}>매달</MenuItem>
+                </Select>
+              </div>
+            )}
+          </div>
+
           <div className="w-full flex justify-end gap-4">
             <button
               className="text-white ml-2 bg-blue-700 hover:bg-blue-800 font-medium rounded-md text-sm px-5 py-2.5 text-center"

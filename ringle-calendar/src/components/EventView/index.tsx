@@ -1,4 +1,4 @@
-import { ViewState } from "@devexpress/dx-react-scheduler";
+import { EditingState, ViewState } from "@devexpress/dx-react-scheduler";
 import Paper from "@mui/material/Paper";
 import {
   Scheduler,
@@ -7,6 +7,7 @@ import {
   ViewSwitcher,
   MonthView,
   Toolbar,
+  EditRecurrenceMenu,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
@@ -52,6 +53,7 @@ export const EventView = ({
           <MonthView />
           <Toolbar />
           <ViewSwitcher />
+
           <Appointments
             appointmentComponent={(props) => (
               <Appointments.Appointment
@@ -70,11 +72,14 @@ export const EventView = ({
                     title: props.data.title,
                     startDate: new Date(props.data.startDate),
                     endDate: new Date(props.data.endDate),
+                    rRule: props.data.rRule ? props.data.rRule : "",
                   });
                 }}
               />
             )}
           />
+          <EditingState onCommitChanges={() => {}} />
+          <EditRecurrenceMenu />
         </Scheduler>
       </Paper>
     </div>

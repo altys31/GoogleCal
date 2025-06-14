@@ -17,7 +17,7 @@ export const EditModal = ({ closeModal, selectedEvent }: EditModalProps) => {
   return (
     <div className={`absolute z-[100] flex items-center justify-center`}>
       <div
-        className={`w-[400px] h-[150px] p-8 rounded-3xl shadow-xl bg-gray-200 overflow-hidden bg-white fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 `}
+        className={`w-[400px] h-[150px] p-8 rounded-3xl shadow-xl bg-gray-200 overflow-hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 `}
       >
         <div className="flex justify-end items-center gap-4">
           <div
