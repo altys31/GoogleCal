@@ -1,17 +1,8 @@
-.sideCalendar{
-  transition: all 0.3s ease;
+.rdp-day {
+  padding: 0rem;
 }
 
-.folded{
-  width: 0;
-  overflow: hidden;
-}
-
-.unfolded{
-  width: 25%;
-}
-
-.rdp-today {
+.rdp-today button {
   border-radius : 100px;
   background : #9fc5e8;
 }
@@ -22,13 +13,13 @@
   --rdp-accent-color: blue; /* The accent color used for selected days and UI elements. */
   --rdp-accent-background-color: #f0f0ff; /* The accent background color used for selected days and UI elements. */
 
-  --rdp-day-height: 44px; /* The height of the day cells. */
-  --rdp-day-width: 44px; /* The width of the day cells. */
+  --rdp-day-height: 32px; /* The height of the day cells. */
+  --rdp-day-width: 32px; /* The width of the day cells. */
   
   --rdp-day_button-border-radius: 100%; /* The border radius of the day cells. */
-  --rdp-day_button-border: 2px solid transparent; /* The border of the day cells. */
-  --rdp-day_button-height: 42px; /* The height of the day cells. */
-  --rdp-day_button-width: 42px; /* The width of the day cells. */
+  --rdp-day_button-border: 1px solid transparent; /* The border of the day cells. */
+  --rdp-day_button-height: 24px; /* The height of the day cells. */
+  --rdp-day_button-width: 24px; /* The width of the day cells. */
   
   --rdp-selected-border: 0px solid var(--rdp-accent-color); /* The border of the selected days. */
   --rdp-disabled-opacity: 0.5; /* The opacity of the disabled days. */
@@ -37,7 +28,7 @@
   
   --rdp-dropdown-gap: 0.5rem;/* The gap between the dropdowns used in the month captons. */
   
-  --rdp-months-gap: 2rem; /* The gap between the months in the multi-month view. */
+  --rdp-months-gap: rem; /* The gap between the months in the multi-month view. */
   
   --rdp-nav_button-disabled-opacity: 0.5; /* The opacity of the disabled navigation buttons. */
   --rdp-nav_button-height: 2.25rem; /* The height of the navigation buttons. */
@@ -64,7 +55,7 @@
   --rdp-weeknumber-text-align: center; /* The text alignment of the weekday cells. */
 
   --rdp-weekday-opacity: 0.75; /* The opacity of the weekday. */
-  --rdp-weekday-padding: 0.5rem 0rem; /* The padding of the weekday. */
+  --rdp-weekday-padding: 0rem; /* The padding of the weekday. */
   --rdp-weekday-text-align: center; /* The text alignment of the weekday cells. */
 
   --rdp-gradient-direction: 90deg;
@@ -120,7 +111,7 @@
 
 .rdp-caption_label {
   z-index: 1;
-  padding-left : 0.75rem;
+  padding-left : 0.5rem;
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -213,7 +204,7 @@
   align-content: center;
   height: var(--rdp-nav-height);
   font-weight: bold;
-  font-size: large;
+  font-size: medium;
 }
 
 .rdp-root[data-nav-layout="around"] .rdp-month,
@@ -272,7 +263,7 @@
   opacity: var(--rdp-weekday-opacity);
   padding: var(--rdp-weekday-padding);
   font-weight: 500;
-  font-size: smaller;
+  font-size: x-small;
   text-align: var(--rdp-weekday-text-align);
   text-transform: var(--rdp-weekday-text-transform);
 }

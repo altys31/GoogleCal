@@ -9,11 +9,10 @@ import calIcon from "../../assets/googleCalendarIcon.png";
 import { useDispatch, useSelector } from "react-redux";
 
 export interface CalendarHeaderProps {
-  sideFold: boolean;
   handleSideFold: () => void;
 }
 
-export const CalendarHeader = ({ sideFold, handleSideFold }: CalendarHeaderProps) => {
+export const CalendarHeader = ({ handleSideFold }: CalendarHeaderProps) => {
   const date = useSelector((state: RootState) => state.date.currentDate);
   const dispatch = useDispatch();
 

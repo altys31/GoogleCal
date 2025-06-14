@@ -43,8 +43,8 @@ function App() {
     <div>
       {addModalOpen && <AddModal closeModal={closeAddModal} />}
       {editModalOpen && <EditModal selectedEvent={selectedEvent} closeModal={closeEditModal} />}
-      <CalendarHeader sideFold={sideFold} handleSideFold={handleSideFold} />
-      <div className="flex w-full">
+      <CalendarHeader handleSideFold={handleSideFold} />
+      <div className="flex flex-col items-center lg:flex-row lg:items-start  w-full">
         <SideCalendar sideFold={sideFold} handleModal={openAddModal} />
         <EventView
           folded={sideFold}

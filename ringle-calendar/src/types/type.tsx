@@ -3,4 +3,5 @@ export type Appointment = {
   title: string;
   startDate: Date;
   endDate: Date;
+  rRule: string;
 };

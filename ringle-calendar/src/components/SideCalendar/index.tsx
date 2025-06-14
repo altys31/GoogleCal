@@ -39,22 +39,24 @@ export const SideCalendar = ({ sideFold, handleModal }: SideCalendarProps) => {
             </div>
           </Button>
         </div>
-        <DayPicker
-          navLayout="after"
-          showOutsideDays
-          locale={ko}
-          selected={date}
-          animate
-          month={date}
-          onMonthChange={(newMonth) => dispatch(setDate(newMonth))}
-          onSelect={(date: Date | undefined) => {
-            if (date) dispatch(setDate(date));
-          }}
-          mode="single"
-          formatters={{
-            formatCaption: (date, options) => format(date, "yyyy년 MM월", options),
-          }}
-        />
+        <div className="w-[280px] text-sm">
+          <DayPicker
+            navLayout="after"
+            showOutsideDays
+            locale={ko}
+            selected={date}
+            animate
+            month={date}
+            onMonthChange={(newMonth) => dispatch(setDate(newMonth))}
+            onSelect={(date: Date | undefined) => {
+              if (date) dispatch(setDate(date));
+            }}
+            mode="single"
+            formatters={{
+              formatCaption: (date, options) => format(date, "yyyy년 MM월", options),
+            }}
+          />
+        </div>
       </div>
     </>
   );

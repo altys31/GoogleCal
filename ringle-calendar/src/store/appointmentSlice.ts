@@ -1,23 +1,13 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Appointment } from "../types/type";
+import { testData } from "../components/EventView/appointments";
 
 interface appointmentState{
   currentEvent: Appointment[];
 }
 
 const initialState: appointmentState = {
-  currentEvent: [{
-    id: "1",
-    title: "운동",
-    startDate: new Date(2025,5, 13, 21,0),
-    endDate: new Date(2025,5,13,22,0),
-  },
-  {
-    id: "2",
-    title: "업무",
-    startDate: new Date(2025,5, 13, 9,0),
-    endDate: new Date(2025,5,13,18,0),
-  }]
+  currentEvent: testData
 };
 
 const appointmentSlice = createSlice({
