@@ -56,7 +56,7 @@ export const AddModal = ({ closeModal }: ModalProps) => {
   const addAppointment = () => {
     const newId = uuidv4();
 
-    if (!title || !date || !startTime || !endTime || (rMode && !rRule)) {
+    if (!title || !appointmentDate || !startTime || !endTime || (rMode && !rRule)) {
       alert("모든 항목을 입력해주세요.");
       return;
     }
@@ -81,7 +81,7 @@ export const AddModal = ({ closeModal }: ModalProps) => {
   return (
     <div className={`absolute z-[100] flex items-center justify-center`}>
       <div
-        className={`w-[500px] h-[360px] p-12 rounded-3xl shadow-xl bg-gray-100 overflow-hidden bg-white fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 `}
+        className={`w-[500px] h-[360px] p-12 rounded-3xl shadow-xl bg-white  overflow-hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 `}
       >
         <div className={`absolute top-4 right-4 cursor-pointer`} onClick={() => closeModal()}>
           <HiMiniXMark size={24} color="black" />

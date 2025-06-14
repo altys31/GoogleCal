@@ -32,12 +32,30 @@ export const EventView = ({
   const dispatch = useDispatch();
 
   return (
-    <div className={`h-full duration-300 ${folded ? `w-full` : `w-10/12`}`}>
+    <div className={`duration-300 overflow-x-hidden ${folded ? `w-full` : `w-23/24`}`}>
       <Paper>
-        <Scheduler data={appointments} height={660} locale={"kr-ko"}>
+        <Scheduler data={appointments} locale={"kr-ko"}>
           <ViewState currentDate={date} />
           <WeekView
             cellDuration={60}
+            dayScaleCellComponent={({ startDate, today, ...rest }) => {
+              const dayName = startDate.toLocaleDateString("ko-KR", { weekday: "short" }); // ex. 일
+              const dayNum = startDate.getDate();
+
+              return (
+                <th
+                  {...rest}
+                  className={`dx-scheduler-header-panel-cell text-center py-2 ${
+                    today ? "text-blue-600 font-bold" : "text-gray-800 font-bold"
+                  }`}
+                >
+                  <div className="flex flex-col items-center leading-snug">
+                    <span>{dayName}</span>
+                    <span className="text-3xl">{dayNum}</span>
+                  </div>
+                </th>
+              );
+            }}
             timeTableCellComponent={(props) => (
               <WeekView.TimeTableCell
                 {...props}
