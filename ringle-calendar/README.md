@@ -1,54 +1,46 @@
-# React + TypeScript + Vite
+# Google Calendar Week View Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+링글 프론트엔드 인턴 과제로 구현한 Google Calendar [주간 보기] 클론입니다.
 
-Currently, two official plugins are available:
+## 🔗 배포 링크
+👉 https://google-cal.vercel.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 💻 GitHub 저장소
+👉 https://github.com/altys31/GoogleCal
 
-## Expanding the ESLint configuration
+## 🛠️ 기술 스택
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React**
+- **TypeScript**
+- **Redux Toolkit** (상태 관리)
+- **Tailwind CSS  & SCSS ** (스타일링)
+- **Vite** (개발 서버 및 빌드)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## ✅ 주요 기능
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **주간 캘린더 UI**  
+  시간대별로 구성된 주간 보기 캘린더를 구현했습니다.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **일정 생성 & 삭제**  
+  시간 블록을 클릭하면 모달을 통해 일정을 생성할 수 있으며, 일정 클릭 시 상세 조회 및 삭제가 가능합니다. Redux로 관리됩니다. 
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- **Date Picker 연동**  
+  날짜 선택기에서 선택한 날짜를 기준으로 주간 캘린더가 동기화됩니다.
+
+- **Redux 상태 동기화**  
+  모달, 캘린더, 날짜 선택기 간의 상태가 Redux로 일관되게 관리됩니다.
+
+## 🌟 보너스 구현
+
+- **월간 캘린더 UI**
+  월간 형식의 캘린더로 해당 일의 일정을 확인 할 수 있습니다.    
+
+- **겹치는 일정 정렬 처리**  
+  동일한 시간대에 겹치는 이벤트들을 나란히 배치하여 시각적으로 구분됩니다.
+
+- **반복 일정 기능**  
+  매일/매주/매월 반복되는 일정 설정이 가능하며, 캘린더에 자동으로 반영됩니다.
+   
+- **반응형 UI**  
+  다양한 화면에서도 잘 작동하도록 기본적인 반응형 처리를 적용했습니다.
+
